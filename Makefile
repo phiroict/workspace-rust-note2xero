@@ -15,8 +15,8 @@ release-rc: version release
 release-windows: test
 	cargo doc
 	cargo build --release --target x86_64-pc-windows-gnu
-run:
-	cargo run 2778
+run_cli:
+	cargo run -p noted2xero_cli
 test:
 	cargo test
 deploy: release
