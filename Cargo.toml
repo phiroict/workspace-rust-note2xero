@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "noted2xero_core",
+    "noted2xero_web",
+    "noted2xero_cli"
+]
