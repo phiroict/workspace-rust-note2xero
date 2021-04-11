@@ -7,3 +7,11 @@ This project is workspace split in three functional modules:
 - Web
 - CLI 
 
+# Components 
+
+## Web 
+Needs the nightly build of the Rust stack
+
+```bash 
+rustup override set nightly
+```

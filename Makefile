@@ -18,6 +18,10 @@ release-windows: test
 run_cli: build
 	cp target/debug/noted2xero_cli noted2xero_cli/
 	cd noted2xero_cli && ./noted2xero_cli 3000
+run_web: build
+	cp target/debug/noted2xero_web noted2xero_web/
+	cd noted2xero_web && ./noted2xero_web
+
 test:
 	cargo test
 deploy: release
