@@ -1,4 +1,8 @@
 /target
 /.idea
 noted2xero_cli/resources
+noted2xero_command
+noted2xero_web_service
+noted2xero_web
+/deploy/builder/src
 
