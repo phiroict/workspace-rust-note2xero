@@ -192,6 +192,7 @@ name = "noted2xero_core"
 version = "0.1.0"
 dependencies = [
  "chrono",
+ "csv",
  "env_logger",
  "log",
  "simple_logger",
