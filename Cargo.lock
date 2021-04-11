@@ -577,6 +577,7 @@ dependencies = [
  "noted2xero_core",
  "rocket",
  "rocket-multipart-form-data",
+ "serde",
  "uuid",
 ]
 
