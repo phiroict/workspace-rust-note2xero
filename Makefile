@@ -1,4 +1,4 @@
-N2X_VERSION ?= `bash get_web_version_from_toml.sh`
+N2X_VERSION ?= $(shell bash get_web_version_from_toml.sh)
 init:
 	rustup override set nightly
 	cargo install cargo-bump
