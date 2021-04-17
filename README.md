@@ -15,3 +15,16 @@ Needs the nightly build of the Rust stack
 ```bash 
 rustup override set nightly
 ```
+
+
+# Security
+
+Scan for sec issues by for instance
+You need to be logged in to the docker hub
+
+
+```
+docker login
+...
+docker scan --accept-license -f deploy/builder/Dockerfile_arm docker.io/phiroict/noted2xero_web:0.2.0_arm
+```

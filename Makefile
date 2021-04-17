@@ -9,6 +9,8 @@ build:
 	cargo build
 build_container:
 	docker build -t phiroict/noted2xero_web:$(N2X_VERSION) -f deploy/builder/Dockerfile .
+build_container_arm:
+	docker build -t phiroict/noted2xero_web:$(N2X_VERSION)_arm -f deploy/builder/Dockerfile_arm .
 build_container_release: version_web build_container
 version_cli:
 	cd noted2xero_cli && cargo bump patch --git-tag
@@ -33,6 +35,8 @@ run_web: build
 	cd noted2xero_web && ./noted2xero_web
 run_web_container:
 	docker run -d -p 8000:8000 phiroict/noted2xero_web:$(N2X_VERSION)
+run_web_container_arm:
+	docker run -d -p 8000:8000 phiroict/noted2xero_web:$(N2X_VERSION)_arm
 test:
 	cargo test
 deploy: release
