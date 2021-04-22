@@ -66,3 +66,5 @@ cargo clippy
 rustup component add rustfmt
 cargo fmt
 ```
+
+## CI
