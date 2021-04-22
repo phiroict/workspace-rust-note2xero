@@ -2,10 +2,15 @@
 
 This is a more advanced structure than the original project git@github.com:phiroict/arletta-noted2xero-converter-rust.git
 
+It has been updated with the tooling to build, deploy and CI/CD pipelines to make this real enterprise project. 
+
+
+## Code
 This project is workspace split in three functional modules: 
 - Core
 - Web
 - CLI 
+Connected by a Rust workspace and an virtual workspace file (POM type Maven equivalent)
 
 This project is a showcase for the usage of Rust as a project language and its integration into a DevOps pipeline.
 
@@ -15,15 +20,16 @@ This contains:
 - Build and run in containers 
 
 To be added: 
-- Deploy pipline
+- Deploy pipeline
 
 
 # Get started 
 
 Install the stack: 
-- Rust
-- Visual code or CLion with the rust plugin installed. 
-- 
+- Rust (nightly build 1.53-nightly+) 
+- Visual code (1.55+) or CLion (2021.1+) with the rust plugin installed.  
+- Docker (2.10.6+)
+- Docker Compose (1.29.x+)
 
 # Components 
 

@@ -7,15 +7,15 @@ init:
 	mkdir -p noted2xero_cli/resources/donefolder
 	mkdir -p noted2xero_cli/resources/notedfolder
 	mkdir -p noted2xero_cli/resources/xerofolder
-build: check_code
-	cargo build
-build_container: check_container
-	docker build -t phiroict/noted2xero_web:$(N2X_VERSION) -f deploy/builder/Dockerfile .
 check_code:
 	cargo clippy
 	cargo fmt
+build: check_code
+	cargo build
 check_container: check_code
 	docker run --rm -i hadolint/hadolint <  deploy/builder/Dockerfile
+build_container: check_code check_container
+	docker build -t phiroict/noted2xero_web:$(N2X_VERSION) -f deploy/builder/Dockerfile .
 check_container_arm: check_code
 	docker run --rm -i hadolint/hadolint <  deploy/builder/Dockerfile_arm
 build_container_arm:
@@ -50,4 +50,8 @@ test:
 	cargo test
 deploy: release
 	cd deploy/ansible && ansible-playbook --connection=local deploy-notedfolder.yml
+run_stack:
+	cd deploy/local-stack && docker-compose up -d
+stop_stack:
+	cd deploy/local-stack && docker-compose down
 .PHONY: deploy

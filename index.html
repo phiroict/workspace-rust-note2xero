@@ -3,9 +3,9 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        <form method="POST" name="data" action="http://localhost:8000/noted/2792" enctype="multipart/form-data">
-            <input type="text" name="text" id="text" /><br/>
-            <input type="file" name="data" id="data" /><br/>
+        <form method="POST" name="data" action="http://localhost:8000/noted" enctype="multipart/form-data">
+            <label for="text" about="Invoice start number">Invoice start number</label> <input type="text" name="text" id="text" /><br/>
+            <label for="data" about="Uploaded noted report">Upload noted report </label><input type="file" name="data" id="data" /><br/>
             <input type="submit"><br/>
         </form>
     </body>
