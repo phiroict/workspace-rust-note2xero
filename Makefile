@@ -9,13 +9,15 @@ init:
 	mkdir -p noted2xero_cli/resources/xerofolder
 build: check_code
 	cargo build
-build_container:
+build_container: check_container
 	docker build -t phiroict/noted2xero_web:$(N2X_VERSION) -f deploy/builder/Dockerfile .
 check_code:
 	cargo clippy
 	cargo fmt
-check_container: build_container check_code
-	docker scan --accept-license -f deploy/builder/Dockerfile_arm docker.io/phiroict/noted2xero_web:$(N2X_VERSION)
+check_container: check_code
+	docker run --rm -i hadolint/hadolint <  deploy/builder/Dockerfile
+check_container_arm: check_code
+	docker run --rm -i hadolint/hadolint <  deploy/builder/Dockerfile_arm
 build_container_arm:
 	docker build -t phiroict/noted2xero_web:$(N2X_VERSION)_arm -f deploy/builder/Dockerfile_arm .
 build_container_release: version_web build_container
