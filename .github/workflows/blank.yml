@@ -28,6 +28,7 @@ jobs:
       - name: Checkout submodules
         uses: srt32/git-actions@v0.0.3
         with:
+          token: ${{ secrets.MY_GITHUB_PAT }}
           args: git submodule update --init --recursive
       - name: Install latest nightly
         uses: actions-rs/toolchain@v1
