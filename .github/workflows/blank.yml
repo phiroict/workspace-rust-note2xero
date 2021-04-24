@@ -18,7 +18,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: archlinux:base-devel-20210418.0.20194
+    runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v2
   
       - name: Install the run models
-        run: pacman -Syu --noconfirm && pacman -S rustup gcc make --noconfirm && rustup install nightly 
+        run: apt update && apt upgrade -y && apt install rustup gcc make --noconfirm && rustup install nightly 
   
       - name: Run the tests 
         run: make test
