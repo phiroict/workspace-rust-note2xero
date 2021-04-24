@@ -33,7 +33,7 @@ jobs:
       - name: Check the application checkout
         run: |
           ls -l
-          ls -l noted2xero_cli\
+          ls -l noted2xero_cli
           pwd
       - name: Run cargo check
         uses: actions-rs/cargo@v1
