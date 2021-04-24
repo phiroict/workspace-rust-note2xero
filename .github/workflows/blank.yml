@@ -24,12 +24,24 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-  
-      - name: Install the run models
-        run: sudo apt update && sudo apt upgrade -y && sudo apt install rustup build-essential  && rustup install nightly
-  
-      - name: Run the tests 
-        run: make test
+      - name: Install latest nightly
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          override: true
+          components: rustfmt, clippy, rustfmt
 
-      - name: Build the release version
-        run: make build
+
+      - name: Run cargo check
+        uses: actions-rs/cargo@v1
+        with:
+          command: check
+
+      - name: Run cargo build & code check
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+      - name: Run cargo tests
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
