@@ -1,9 +1,11 @@
 # Noted2Xero
 
-This is a more advanced structure than the original project git@github.com:phiroict/arletta-noted2xero-converter-rust.git
+This is an educational Rust project for a (small) real live problem using as many components for a full developer/deploy/production 
+pipeline.  
+The problem is converting a CSV report file (from a program called noted) to a xero invoice import format. A very basic problem
+that is a good learning ground for learning Rust.
 
-It has been updated with the tooling to build, deploy and CI/CD pipelines to make this real enterprise project. 
-
+# The project
 
 ## Code
 This project is workspace split in three functional modules: 
@@ -68,3 +70,4 @@ cargo fmt
 ```
 
 ## CI
+Looking at github action
