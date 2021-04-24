@@ -70,4 +70,7 @@ cargo fmt
 ```
 
 ## CI
-Looking at github action
+Uses a github action for build and delivery into a docker project. 
+
+
+[![CI](https://github.com/phiroict/workspace-rust-note2xero/actions/workflows/blank.yml/badge.svg)](https://github.com/phiroict/workspace-rust-note2xero/actions/workflows/blank.yml)
