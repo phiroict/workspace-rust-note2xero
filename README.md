@@ -47,7 +47,7 @@ Install the stack:
 - Git (2.8+)
 - Rust (nightly build 1.53-nightly+) 
 - Visual code (1.55+) or CLion (2021.1+) with the rust plugin installed.  
-- Docker (2.10.6+)
+- Docker (20.10.6+)
 - Docker Compose (1.29.x+)
 - Make (CMake) 
 - gcc or the windows equivalent for those so inclined. (Visual Studio or MingGW)
