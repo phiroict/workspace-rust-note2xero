@@ -10,6 +10,7 @@ init:
 check_code:
 	cargo clippy
 	cargo fmt
+	cargo test
 build: check_code
 	cargo build
 check_container: check_code

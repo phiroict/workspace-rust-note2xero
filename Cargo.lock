@@ -543,7 +543,7 @@ dependencies = [
 
 [[package]]
 name = "noted2xero_cli"
-version = "0.1.0"
+version = "0.3.2"
 dependencies = [
  "chrono",
  "csv",
@@ -556,7 +556,7 @@ dependencies = [
 
 [[package]]
 name = "noted2xero_core"
-version = "0.1.0"
+version = "0.3.2"
 dependencies = [
  "chrono",
  "csv",
@@ -568,7 +568,7 @@ dependencies = [
 
 [[package]]
 name = "noted2xero_web"
-version = "0.3.0"
+version = "0.3.2"
 dependencies = [
  "chrono",
  "csv",
