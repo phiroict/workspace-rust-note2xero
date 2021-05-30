@@ -9,6 +9,6 @@
       ports:
         - "8180:80"
     noted2xero_service:
-        image: "phiroict/noted2xero_web:0.3.0"
+        image: "phiroict/noted2xero_web:0.3.2"
         ports:
           - "8000:8000"
