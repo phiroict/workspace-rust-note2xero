@@ -19,6 +19,8 @@ build_container: check_code check_container
 	docker build -t phiroict/noted2xero_web:$(N2X_VERSION) -f deploy/builder/Dockerfile .
 check_container_arm: check_code
 	docker run --rm -i hadolint/hadolint <  deploy/builder/Dockerfile_arm
+push_container:
+	docker push phiroict/noted2xero_web:$(N2X_VERSION)
 build_container_arm:
 	docker build -t phiroict/noted2xero_web:$(N2X_VERSION)_arm -f deploy/builder/Dockerfile_arm .
 build_container_release: version_web build_container
@@ -39,7 +41,7 @@ release-windows: test
 	cargo build --release --target x86_64-pc-windows-gnu
 run_cli: build
 	cp target/debug/noted2xero_cli noted2xero_cli/
-	cd noted2xero_cli && ./noted2xero_cli 3000
+	cd noted2xero_cli && ./noted2xero_cli 2893
 run_web: build
 	cp target/debug/noted2xero_web noted2xero_web/
 	cd noted2xero_web && ./noted2xero_web
