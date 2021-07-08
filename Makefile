@@ -41,7 +41,7 @@ release-windows: test
 	cargo build --release --target x86_64-pc-windows-gnu
 run_cli: build
 	cp target/debug/noted2xero_cli noted2xero_cli/
-	cd noted2xero_cli && ./noted2xero_cli 2893
+	cd noted2xero_cli && ./noted2xero_cli 2928
 run_web: build
 	cp target/debug/noted2xero_web noted2xero_web/
 	cd noted2xero_web && ./noted2xero_web
@@ -55,6 +55,7 @@ deploy: release
 	cd deploy/ansible && ansible-playbook --connection=local deploy-notedfolder.yml
 run_stack:
 	cd deploy/local-stack && docker-compose up -d
+	firefox http://localhost:8180 &
 stop_stack:
 	cd deploy/local-stack && docker-compose down
 .PHONY: deploy
