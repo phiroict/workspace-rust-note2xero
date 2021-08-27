@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-xero2noted
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /xero
+        pathType: Prefix
+        backend:
+          service:
+            name: noted-frontend-service
+            port:
+              number: 80
+      - path: /noted
+        pathType: Prefix
+        backend:
+          service:
+            name: xero-web-service
+            port:
+              number: 8000
+

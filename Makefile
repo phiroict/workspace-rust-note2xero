@@ -59,3 +59,6 @@ run_stack:
 stop_stack:
 	cd deploy/local-stack && docker-compose down
 .PHONY: deploy
+build_frontend:
+	docker build -f Dockerfile_nginx -t phiroict/xero_frontend:$(N2X_VERSION) .
+	docker push phiroict/xero_frontend:$(N2X_VERSION)
