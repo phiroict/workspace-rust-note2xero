@@ -7,6 +7,7 @@ init:
 	mkdir -p noted2xero_cli/resources/donefolder
 	mkdir -p noted2xero_cli/resources/notedfolder
 	mkdir -p noted2xero_cli/resources/xerofolder
+	sudo systemctl start docker
 check_code:
 	cargo clippy
 	cargo fmt
@@ -41,7 +42,7 @@ release-windows: test
 	cargo build --release --target x86_64-pc-windows-gnu
 run_cli: build
 	cp target/debug/noted2xero_cli noted2xero_cli/
-	cd noted2xero_cli && ./noted2xero_cli 2928
+	cd noted2xero_cli && ./noted2xero_cli 3045
 run_web: build
 	cp target/debug/noted2xero_web noted2xero_web/
 	cd noted2xero_web && ./noted2xero_web
