@@ -23,14 +23,29 @@ spec:
         app: noted2xero
     spec:
       containers:
-        - image: phiroict/noted2xero_web:0.3.2
-          imagePullPolicy: IfNotPresent
+        - image: phiroict/noted2xero_web:0.3.4
+          imagePullPolicy: Always
           name: noted2xero-web-lvxq7
-          resources: {}
+          livenessProbe:
+            httpGet:
+              port: 8000
+              path: /healthcheck
+              scheme: HTTP
+          resources:
+            limits:
+              memory: 1Gi
+              cpu: 10m
+            requests:
+              memory: 1Gi
+              cpu: 10m
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
+          securityContext:
+            runAsNonRoot: false
+            allowPrivilegeEscalation: false
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
-      securityContext: {}
+      securityContext:
+        runAsNonRoot: true
       terminationGracePeriodSeconds: 30

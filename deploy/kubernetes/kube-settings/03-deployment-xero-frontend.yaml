@@ -23,16 +23,28 @@ spec:
         app: noted-frontend
     spec:
       containers:
-        - image: phiroict/xero_frontend:0.3.2
-          imagePullPolicy: IfNotPresent
+        - image: phiroict/xero_frontend@sha256:6826cf14e8b2feb2c119cb7fd693fddb75fac1c81e5a0e6903834d5c9c007748
+          imagePullPolicy: Always
           name: noted-frontend
-          resources: {}
+          livenessProbe:
+            httpGet:
+              port: 80
+              scheme: HTTP
+          resources:
+            limits:
+              memory: 256M
+              cpu: 10m
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
+
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
-      securityContext: {}
+      securityContext:
+        runAsNonRoot: true
       terminationGracePeriodSeconds: 30
 
 

@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: xero-web-service
+  namespace: apps-noted-xero
 spec:
   selector:
     app: noted2xero
