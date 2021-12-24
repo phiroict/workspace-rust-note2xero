@@ -61,6 +61,6 @@ jobs:
           file: deploy/builder/Dockerfile
           context: .
           push: true
-          tags: phiroict/noted2xero_web:0.3.4
+          tags: phiroict/noted2xero_web:0.4.0-rc2
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
