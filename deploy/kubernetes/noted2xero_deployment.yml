@@ -30,7 +30,8 @@ spec:
         app: noted-frontend
     spec:
       containers:
-        - image: phiroict/noted2xero_web@sha256:47ec81f0ad0e7d47a82fcc96987d17dd0ac247d9ad4d4a3e758180163beca89d
+        # Version 0.4.0-rc3
+        - image: phiroict/noted2xero_web@sha256:104cf978b70154c63a7749e4d1c4cfb5ec8f17593cd21afdec101a24c822c11b
           imagePullPolicy: Always
           name: noted-frontend
           resources:
