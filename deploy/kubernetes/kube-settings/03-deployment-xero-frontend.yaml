@@ -39,12 +39,16 @@ spec:
             allowPrivilegeEscalation: false
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
-
+          volumeMounts:
+          - mountpath: /etc/nginx
+            name: main-page
+            subPath: index.html
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext:
         runAsNonRoot: true
       terminationGracePeriodSeconds: 30
-
+      volumes:
+        - name: main-page
 

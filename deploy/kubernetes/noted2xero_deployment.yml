@@ -1,5 +1,25 @@
 ---
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: apps-noted-xero
+  name: main-page
+data:
+  index: |
+    <html>
+        <head>
+            <link rel="stylesheet" href="styles.css">
+        </head>
+        <body>
+            <form method="POST" name="data" action="http://192.168.49.2:30002/noted" enctype="multipart/form-data">
+                <label for="text" about="Invoice start number">Invoice start number</label> <input type="text" name="text" id="text" /><br/>
+                <label for="data" about="Uploaded noted report">Upload noted report </label><input type="file" name="data" id="data" /><br/>
+                <input type="submit"><br/>
+            </form>
+        </body>
+    </html>
+---
+apiVersion: v1
 kind: Namespace
 metadata:
   name: apps-noted-xero
@@ -8,8 +28,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: noted-frontend
-  name: noted-frontend
+    app: noted-web
+  name: noted-web
   namespace: apps-noted-xero
 spec:
   progressDeadlineSeconds: 600
@@ -17,7 +37,7 @@ spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: noted-frontend
+      app: noted-web
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -27,13 +47,13 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        app: noted-frontend
+        app: noted-web
     spec:
       containers:
         # Version 0.4.0-rc3
         - image: phiroict/noted2xero_web@sha256:104cf978b70154c63a7749e4d1c4cfb5ec8f17593cd21afdec101a24c822c11b
           imagePullPolicy: Always
-          name: noted-frontend
+          name: noted-web
           resources:
             limits:
               memory: "256Mi"
@@ -66,6 +86,61 @@ spec:
         runAsUser: 1000
       terminationGracePeriodSeconds: 30
 ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: noted-frontend
+  name: noted-frontend
+  namespace: apps-noted-xero
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: noted-frontend
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: noted-frontend
+    spec:
+      containers:
+        - image: phiroict/xero_frontend@sha256:6826cf14e8b2feb2c119cb7fd693fddb75fac1c81e5a0e6903834d5c9c007748
+          imagePullPolicy: Always
+          name: noted-frontend
+          livenessProbe:
+            httpGet:
+              port: 80
+              scheme: HTTP
+          resources:
+            limits:
+              memory: 256M
+              cpu: 10m
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /etc/nginx
+              name: main-page
+              subPath: index2.html
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: main-page
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -74,75 +149,49 @@ metadata:
 spec:
   type: NodePort
   selector:
-    app: noted-frontend
+    app: noted-web
   ports:
     - port: 80
       targetPort: 8000
       protocol: TCP
       nodePort: 30002
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: noted-frontend-service
+  namespace: apps-noted-xero
+spec:
+  selector:
+    app: noted-frontend
+  ports:
+    - port: 80
+      targetPort: 8080
+      name: http-xerowebport
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: minimal-ingress
-  namespace: apps-noted-xero
   annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"networking.k8s.io/v1","kind":"Ingress","metadata":{"annotations":{"nginx.ingress.kubernetes.io/rewrite-target":"/"},"name":"ingress-xero-web","namespace":"apps-noted-xero"},"spec":{"rules":[{"http":{"paths":[{"backend":{"service":{"name":"xero-web-service","port":{"number":8000}}},"path":"/noted","pathType":"Exact"}]}}]}}
     nginx.ingress.kubernetes.io/rewrite-target: /
+  creationTimestamp: "2021-08-27T03:50:47Z"
+  generation: 1
+  name: ingress-xero-web
+  namespace: apps-noted-xero
+  resourceVersion: "19991"
+  uid: 7dcb86e0-850c-4039-b679-e7ccf458134c
 spec:
   rules:
     - http:
         paths:
-          - path: /noted
-            pathType: Prefix
-            backend:
+          - backend:
               service:
-                name: note2xero-srv
+                name: xero-web-service
                 port:
-                  number: 80
-
-#---
-#apiVersion: apps/v1
-#kind: Deployment
-#metadata:
-#  labels:
-#    app: noted2xero
-#  name: noted2xero
-#  namespace: apps-noted-xero
-#spec:
-#  progressDeadlineSeconds: 600
-#  replicas: 1
-#  revisionHistoryLimit: 10
-#  selector:
-#    matchLabels:
-#      app: noted2xero
-#  strategy:
-#    rollingUpdate:
-#      maxSurge: 25%
-#      maxUnavailable: 25%
-#    type: RollingUpdate
-#  template:
-#    metadata:
-#      creationTimestamp: null
-#      labels:
-#        app: noted2xero
-#    spec:
-#      containers:
-#        - image: phiroict/noted2xero_web:0.4.0-rc1
-#          imagePullPolicy: Always
-#          name: noted2xero-web
-#          resources: {}
-#          terminationMessagePath: /dev/termination-log
-#          terminationMessagePolicy: File
-#          livenessProbe:
-#            initialDelaySeconds: 20
-#            httpGet:
-#              port: 8000
-#          securityContext:
-#            allowPrivilegeEscalation: false
-#            readOnlyRootFilesystem: false
-#      dnsPolicy: ClusterFirst
-#      restartPolicy: Always
-#      schedulerName: default-scheduler
-#      securityContext:
-#        runAsNonRoot: true
-#      terminationGracePeriodSeconds: 30
+                  number: 8000
+            path: /noted
+            pathType: Prefix
+status:
+  loadBalancer: {}

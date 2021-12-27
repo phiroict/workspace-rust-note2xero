@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: apps-noted-xero
+  name: main-page
+data:
+  index: |
+    <html>
+        <head>
+            <link rel="stylesheet" href="styles.css">
+        </head>
+        <body>
+            <form method="POST" name="data" action="http://192.168.49.2:30002/noted" enctype="multipart/form-data">
+                <label for="text" about="Invoice start number">Invoice start number</label> <input type="text" name="text" id="text" /><br/>
+                <label for="data" about="Uploaded noted report">Upload noted report </label><input type="file" name="data" id="data" /><br/>
+                <input type="submit"><br/>
+            </form>
+        </body>
+    </html>

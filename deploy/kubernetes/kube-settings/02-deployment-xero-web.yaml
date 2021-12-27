@@ -1,9 +1,10 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: noted2xero
-  name: noted2xero
+    app: noted-frontend
+  name: noted-frontend
   namespace: apps-noted-xero
 spec:
   progressDeadlineSeconds: 600
@@ -11,41 +12,51 @@ spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: noted2xero
+      app: noted-frontend
   strategy:
     rollingUpdate:
       maxSurge: 25%
       maxUnavailable: 25%
     type: RollingUpdate
   template:
-    metadata:      
+    metadata:
+      creationTimestamp: null
       labels:
-        app: noted2xero
+        app: noted-frontend
     spec:
       containers:
-        - image: phiroict/noted2xero_web:0.3.4
+        # Version 0.4.0-rc3
+        - image: phiroict/noted2xero_web@sha256:104cf978b70154c63a7749e4d1c4cfb5ec8f17593cd21afdec101a24c822c11b
           imagePullPolicy: Always
-          name: noted2xero-web-lvxq7
-          livenessProbe:
-            httpGet:
-              port: 8000
-              path: /healthcheck
-              scheme: HTTP
+          name: noted-frontend
           resources:
             limits:
-              memory: 1Gi
-              cpu: 10m
+              memory: "256Mi"
+              cpu: "10m"
             requests:
-              memory: 1Gi
-              cpu: 10m
+              memory: "128Mi"
+              cpu: "10m"
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
+          livenessProbe:
+            initialDelaySeconds: 20
+            tcpSocket:
+              port: 8000
           securityContext:
-            runAsNonRoot: false
             allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: false
+          readinessProbe:
+            httpGet:
+              scheme: HTTP
+              port: 8000
+              path: healthcheck
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            timeoutSeconds: 30
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext:
         runAsNonRoot: true
+        runAsUser: 1000
       terminationGracePeriodSeconds: 30
