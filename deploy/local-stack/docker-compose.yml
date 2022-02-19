@@ -8,6 +8,7 @@
         - "../../styles.css:/usr/share/nginx/html/styles.css:ro"
       ports:
         - "8180:80"
+    # Version 0.4.0
     noted2xero_service:
         image: "phiroict/noted2xero_web@sha256:eeea4d4903af0ae35226cbd2f0b1d368f6f0c4224af3fe4e49115f1719552801"
         ports:
