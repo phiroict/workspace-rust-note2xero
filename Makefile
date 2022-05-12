@@ -36,6 +36,13 @@ release: test
 	cp target/release/noted2xero_web noted2xero_web_service
 	cp target/release/noted2xero_web deploy/container/noted2xero_web
 	cd deploy/container && docker build -t phiroict/noted2xero_web:$(N2X_VERSION) .
+release_arm: test
+	cargo doc
+	cargo build --release
+	cp target/release/noted2xero_cli noted2xero_command
+	cp target/release/noted2xero_web noted2xero_web_service
+	cp target/release/noted2xero_web deploy/container/noted2xero_web
+	cd deploy/container && docker build -t phiroict/noted2xero_web:$(N2X_VERSION)_arm .
 release-rc: version release
 release-windows: test
 	cargo doc
@@ -59,6 +66,12 @@ run_stack:
 	firefox http://localhost:8180 &
 stop_stack:
 	cd deploy/local-stack && docker-compose down
+run_stack_arm:
+	cd deploy/local-stack-arm && docker-compose up -d
+	firefox http://localhost:8180 &
+stop_stack_arm:
+	cd deploy/local-stack-arm && docker-compose down
+
 .PHONY: deploy
 build_frontend:
 	docker build -f Dockerfile_nginx -t phiroict/xero_frontend:$(N2X_VERSION) .

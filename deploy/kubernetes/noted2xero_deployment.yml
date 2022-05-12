@@ -176,12 +176,8 @@ metadata:
     kubectl.kubernetes.io/last-applied-configuration: |
       {"apiVersion":"networking.k8s.io/v1","kind":"Ingress","metadata":{"annotations":{"nginx.ingress.kubernetes.io/rewrite-target":"/"},"name":"ingress-xero-web","namespace":"apps-noted-xero"},"spec":{"rules":[{"http":{"paths":[{"backend":{"service":{"name":"xero-web-service","port":{"number":8000}}},"path":"/noted","pathType":"Exact"}]}}]}}
     nginx.ingress.kubernetes.io/rewrite-target: /
-  creationTimestamp: "2021-08-27T03:50:47Z"
-  generation: 1
   name: ingress-xero-web
   namespace: apps-noted-xero
-  resourceVersion: "19991"
-  uid: 7dcb86e0-850c-4039-b679-e7ccf458134c
 spec:
   rules:
     - http:

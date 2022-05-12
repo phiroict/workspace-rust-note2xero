@@ -8,10 +8,8 @@
         - "../../styles.css:/usr/share/nginx/html/styles.css:ro"
       ports:
         - "8180:80"
-    # Version 0.4.0
+    # Version phiroict/noted2xero_web:0.5.0_arm
     noted2xero_service:
-        image: "phiroict/noted2xero_web@sha256:eeea4d4903af0ae35226cbd2f0b1d368f6f0c4224af3fe4e49115f1719552801"
+        image: "phiroict/noted2xero_web@sha256:194748c18a71af2835a2cb5085316bdb3844895ffa8cee8fc890eed5c5f1fb8b"
         ports:
           - "8000:8000"
-        environment:
-          TZ: "Pacific/Auckland"
