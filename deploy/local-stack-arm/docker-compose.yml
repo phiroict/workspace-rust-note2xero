@@ -13,3 +13,5 @@
         image: "phiroict/noted2xero_web@sha256:194748c18a71af2835a2cb5085316bdb3844895ffa8cee8fc890eed5c5f1fb8b"
         ports:
           - "8000:8000"
+        environment:
+          TZ: "Pacific/Auckland"
