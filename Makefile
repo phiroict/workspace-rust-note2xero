@@ -22,6 +22,8 @@ check_container_arm: check_code
 	docker run --rm -i hadolint/hadolint <  deploy/builder/Dockerfile_arm
 push_container:
 	docker push phiroict/noted2xero_web:$(N2X_VERSION)
+push_container_arm:
+	docker push phiroict/noted2xero_web:$(N2X_VERSION)_arm
 build_container_arm:
 	docker build -t phiroict/noted2xero_web:$(N2X_VERSION)_arm -f deploy/builder/Dockerfile_arm .
 build_container_release: version_web build_container
@@ -56,13 +58,16 @@ run_web: build
 run_web_container:
 	docker run -d -p 8000:8000 phiroict/noted2xero_web:$(N2X_VERSION)
 run_web_container_arm:
-	docker run -d -p 8000:8000 phiroict/noted2xero_web:$(N2X_VERSION)_arm
+	docker run -it -p 8000:8000 phiroict/noted2xero_web:$(N2X_VERSION)_arm
 test:
 	cargo test
 deploy: release
 	cd deploy/ansible && ansible-playbook --connection=local deploy-notedfolder.yml
 run_stack:
 	cd deploy/local-stack && docker-compose up -d
+	firefox http://localhost:8180 &
+run_stack_arm:
+	cd deploy/local-stack-arm && docker-compose up -d
 	firefox http://localhost:8180 &
 stop_stack:
 	cd deploy/local-stack && docker-compose down
