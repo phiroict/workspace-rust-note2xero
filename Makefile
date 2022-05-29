@@ -31,20 +31,8 @@ version_cli:
 	cd noted2xero_cli && cargo bump patch --git-tag
 version_web:
 	cd noted2xero_web && cargo bump patch --git-tag
-release: test
-	cargo doc
-	cargo build --release
-	cp target/release/noted2xero_cli noted2xero_command
-	cp target/release/noted2xero_web noted2xero_web_service
-	cp target/release/noted2xero_web deploy/container/noted2xero_web
-	cd deploy/container && docker build -t phiroict/noted2xero_web:$(N2X_VERSION) .
-release_arm: test
-	cargo doc
-	cargo build --release
-	cp target/release/noted2xero_cli noted2xero_command
-	cp target/release/noted2xero_web noted2xero_web_service
-	cp target/release/noted2xero_web deploy/container/noted2xero_web
-	cd deploy/container && docker build -t phiroict/noted2xero_web:$(N2X_VERSION)_arm .
+release: test build build_container push_container
+release_arm: test build build_container_arm push_container_arm
 release-rc: version release
 release-windows: test
 	cargo doc
@@ -65,9 +53,6 @@ deploy: release
 	cd deploy/ansible && ansible-playbook --connection=local deploy-notedfolder.yml
 run_stack:
 	cd deploy/local-stack && docker-compose up -d
-	firefox http://localhost:8180 &
-run_stack_arm:
-	cd deploy/local-stack-arm && docker-compose up -d
 	firefox http://localhost:8180 &
 stop_stack:
 	cd deploy/local-stack && docker-compose down
