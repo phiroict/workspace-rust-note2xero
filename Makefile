@@ -1,7 +1,7 @@
 N2X_VERSION ?= $(shell bash get_web_version_from_toml.sh)
 init:
 	rustup override set nightly
-	cargo install cargo-bump
+	cargo install cargo-release
 	rustup component add clippy
 	rustup component add rustfmt
 	mkdir -p noted2xero_cli/resources/donefolder
@@ -33,7 +33,7 @@ version_web:
 	cd noted2xero_web && cargo bump patch --git-tag
 release: test build build_container push_container
 release_arm: test build build_container_arm push_container_arm
-release-rc: version release
+release-rc: release
 release-windows: test
 	cargo doc
 	cargo build --release --target x86_64-pc-windows-gnu
