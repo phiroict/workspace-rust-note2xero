@@ -10,10 +10,10 @@
         - "8180:80"
     # Version 0.5.0 -> phiroict/noted2xero_web:0.5.0
     # phiroict/noted2xero_web@sha256:e0a133675a265f8cdff0e0313b730f3769a9d6b4cdb40d37936f94fc15bde8b3
-    # Version 1.11.0 -> phiroict/noted2xero_web:1.11.0
-    # phiroict/noted2xero_web@sha256:a6d1174d3406343df0b19508b224f2b8a8b6499c57187bc0188a368e6ae26b8c
+    # Version 1.11.0 -> phiroict/noted2xero_web:1.11.1
+    # phiroict/noted2xero_web@sha256:d492a6bcec89d69d9ad7a0b28fbfb9ce91ab2d29b48c572417b433dbb49760f9
     noted2xero_service:
-        image: "phiroict/noted2xero_web@sha256:a6d1174d3406343df0b19508b224f2b8a8b6499c57187bc0188a368e6ae26b8c"
+        image: "phiroict/noted2xero_web@sha256:d492a6bcec89d69d9ad7a0b28fbfb9ce91ab2d29b48c572417b433dbb49760f9"
         ports:
           - "8000:8000"
         environment:
