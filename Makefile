@@ -31,9 +31,12 @@ version_cli:
 	cd noted2xero_cli && cargo bump patch --git-tag
 version_web:
 	cd noted2xero_web && cargo bump patch --git-tag
-release: test build build_container push_container
-release_arm: test build build_container_arm push_container_arm
-release-rc: release
+cargo-release:
+	cargo release $(N2X_VERSION) --execute
+cargo-release-arm:
+	cargo release $(N2X_VERSION)-arm --execute
+release: test build build_container push_container cargo-release
+release_arm: test build build_container_arm push_container_arm cargo-release-arm
 release-windows: test
 	cargo doc
 	cargo build --release --target x86_64-pc-windows-gnu
