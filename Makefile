@@ -35,8 +35,10 @@ cargo-release:
 	cargo release $(N2X_VERSION) --execute
 cargo-release-arm:
 	cargo release $(N2X_VERSION)-arm --execute
-release: test build build_container push_container cargo-release
-release_arm: test build build_container_arm push_container_arm cargo-release-arm
+git-commit:
+	git commit -am "Pre release commit"
+release: test build build_container push_container git-commit cargo-release
+release_arm: test build build_container_arm push_container_arm git-commit cargo-release-arm
 release-windows: test
 	cargo doc
 	cargo build --release --target x86_64-pc-windows-gnu
