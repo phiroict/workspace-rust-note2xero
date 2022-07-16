@@ -14,6 +14,9 @@ check_code:
 	cargo test
 build: check_code
 	cargo build
+build_prod: check_code
+	cargo build --release
+
 check_container: check_code
 	docker run --rm -i hadolint/hadolint <  deploy/builder/Dockerfile
 build_container: check_code check_container
