@@ -10,5 +10,6 @@ FROM ubuntu
 RUN mkdir /app
 WORKDIR /app
 COPY --from=builder /target/release/noted2xero_web noted2xero_web
+COPY --from=builder noted2xero_web/Rocket.toml Rocket.toml
 CMD ./noted2xero_web
 

@@ -4,6 +4,7 @@ resources:
   - 00-configuration.yaml
   - 01-namespace.yaml
   - 02-deployment-xero-web.yaml
+  - 03-deployment-xero-frontend.yaml
   - 04-service-xero-frontend.yaml
   - 05-service-xero-web.yaml
   - 06-ingress-xero-frontend.yaml
