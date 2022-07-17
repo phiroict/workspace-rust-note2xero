@@ -1008,7 +1008,7 @@ dependencies = [
 
 [[package]]
 name = "noted2xero_web"
-version = "1.11.2"
+version = "1.11.4"
 dependencies = [
  "async-std",
  "async-trait",
