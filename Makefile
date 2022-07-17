@@ -74,3 +74,8 @@ stop_stack_arm:
 build_frontend:
 	docker build -f Dockerfile_nginx -t phiroict/xero_frontend:$(N2X_VERSION) .
 	docker push phiroict/xero_frontend:$(N2X_VERSION)
+kustomize_mac:
+	cd deploy/kubernetes/kustomize/overlays/mac && kustomize build > kustomize_generated_script.yml
+kustomize_mac_apply:
+	cd deploy/kubernetes/kustomize/overlays/mac && kubectl apply -f kustomize_generated_script.yml
+kustomize_mac_deploy: kustomize_mac kustomize_mac_apply

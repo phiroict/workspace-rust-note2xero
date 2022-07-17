@@ -148,3 +148,25 @@ When forking the project or just working from it you need to change a few things
   - SUBMODULE_TOKEN    : This is github token you need to checkout the submodules if you choose to make these private.
   - DOCKERHUB_USERNAME : The username for the dockerhub you want to push the project to.
   - DOCKERHUB_TOKEN    : The token you have created on github for access, recommended it to give this token only access to the repo and nothing else.  
+
+
+# Kubernetes 
+
+The stack can be deployed to kubernetes, use the kustomize make tasks to deploy 
+
+Note you need for this functionality 
+
+- A Kubernetes cluster 
+- An account to be able to deploy services, deployments, etc.
+- the `kustomize` tool
+
+## Dashboard
+For convenience you can install the [dashboard](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/) and go to it 
+Set up the loadbalancer proxy by:
+
+```bash
+kubectl proxy
+```
+And navigate to it (grab the secret like the site described): 
+
+`http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/`
