@@ -591,6 +591,19 @@ dependencies = [
 
 [[package]]
 name = "env_logger"
+version = "0.9.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a12e6657c4c97ebab115a42dcee77225f7f482cdd841cf7088c657a42e9e00e7"
+dependencies = [
+ "atty",
+ "humantime",
+ "log",
+ "regex",
+ "termcolor",
+]
+
+[[package]]
+name = "env_logger"
 version = "0.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "85cdab6a89accf66733ad5a1693a4dcced6aeff64602b634530dd73c1f3ee9f0"
@@ -1148,11 +1161,11 @@ version = "1.11.2"
 dependencies = [
  "chrono",
  "csv",
- "env_logger",
+ "env_logger 0.10.0",
  "glob",
  "log",
  "noted2xero_core",
- "simple_logger",
+ "simple_logger 4.0.0",
  "tokio",
 ]
 
@@ -1162,9 +1175,9 @@ version = "1.11.4"
 dependencies = [
  "chrono",
  "csv",
- "env_logger",
+ "env_logger 0.9.3",
  "log",
- "simple_logger",
+ "simple_logger 2.3.0",
  "uuid",
 ]
 
@@ -1176,7 +1189,7 @@ dependencies = [
  "async-trait",
  "chrono",
  "csv",
- "env_logger",
+ "env_logger 0.10.0",
  "log",
  "noted2xero_core",
  "rocket",
@@ -1667,6 +1680,19 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e51e73328dc4ac0c7ccbda3a494dfa03df1de2f46018127f60c693f2648455b0"
 dependencies = [
  "libc",
+]
+
+[[package]]
+name = "simple_logger"
+version = "2.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "48047e77b528151aaf841a10a9025f9459da80ba820e425ff7eb005708a76dc7"
+dependencies = [
+ "atty",
+ "colored",
+ "log",
+ "time 0.3.17",
+ "winapi",
 ]
 
 [[package]]
