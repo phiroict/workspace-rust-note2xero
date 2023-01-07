@@ -1,9 +1,12 @@
 [submodule "noted2xero_cli"]
 	path = noted2xero_cli
 	url = git@github.com:phiroict/rust-note2xero-cli.git
+	branch = master
 [submodule "noted2xero_core"]
 	path = noted2xero_core
 	url = git@github.com:phiroict/-rust-note2xero-core.git
+	branch = master
 [submodule "noted2xero_web"]
 	path = noted2xero_web
 	url = git@github.com:phiroict/rust-note2xero-web.git
+	branch = master

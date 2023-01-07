@@ -22,12 +22,10 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout the repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           token: ${{ secrets.SUBMODULE_TOKEN }}
           submodules: recursive
-      - name: Checkout the main branch version if the submodules
-        uses: textbook/git-checkout-submodule-action@master
       - name: Install latest nightly
         uses: actions-rs/toolchain@v1
         with:
