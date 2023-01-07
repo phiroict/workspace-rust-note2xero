@@ -27,7 +27,7 @@ jobs:
           token: ${{ secrets.SUBMODULE_TOKEN }}
           submodules: recursive
       - name: Checkout the main branch version if the submodules
-        uses: textbook/git-checkout-submodule-action@main
+        uses: textbook/git-checkout-submodule-action@master
       - name: Install latest nightly
         uses: actions-rs/toolchain@v1
         with:
