@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"kind":"Deployment","apiVersion":"apps/v1","metadata":{"name":"noted2xero","creationTimestamp":null,"labels":{"app":"noted2xero"}},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"noted2xero"}},"template":{"metadata":{"creationTimestamp":null,"labels":{"app":"noted2xero"}},"spec":{"containers":[{"name":"noted2xero-web-jrfvc","image":"phiroict/noted2xero_web:0.4.0-rc3","resources":{}}]}},"strategy":{}},"status":{}}
+  creationTimestamp: "2022-05-11T23:40:46Z"
+  generation: 1
+  labels:
+    app: noted2xero
+  name: noted2xero
+  namespace: default
+  resourceVersion: "971"
+  uid: 2b2d0504-4c1e-4262-b985-30dca20fa702
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: noted2xero
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: noted2xero
+    spec:
+      containers:
+      - image: phiroict/noted2xero_web:0.4.0-rc3
+        imagePullPolicy: IfNotPresent
+        name: noted2xero-web-jrfvc
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  conditions:
+  - lastTransitionTime: "2022-05-11T23:40:46Z"
+    lastUpdateTime: "2022-05-11T23:40:46Z"
+    message: Deployment does not have minimum availability.
+    reason: MinimumReplicasUnavailable
+    status: "False"
+    type: Available
+  - lastTransitionTime: "2022-05-11T23:40:46Z"
+    lastUpdateTime: "2022-05-11T23:40:46Z"
+    message: ReplicaSet "noted2xero-556748c44" is progressing.
+    reason: ReplicaSetUpdated
+    status: "True"
+    type: Progressing
+  observedGeneration: 1
+  replicas: 1
+  unavailableReplicas: 1
+  updatedReplicas: 1
