@@ -1,15 +1,16 @@
-FROM ubuntu as builder
-RUN apt update && apt upgrade -y && apt install build-essential curl -y
+FROM ubuntu:22.04 as builder
+RUN apt-get update && apt-get upgrade -y && apt-get install --no-install-recommends build-essential=12.9ubuntu3 curl=7.81.0-1ubuntu1.7 ca-certificates=20211016ubuntu0.22.04.1 -y && mkdir -p /src
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 RUN /root/.cargo/bin/rustup install nightly
-ADD . .
-RUN /root/.cargo/bin/rustup override set nightly
-RUN /root/.cargo/bin/cargo test
-RUN /root/.cargo/bin/cargo build --release
-FROM ubuntu
+WORKDIR /src
+COPY . .
+RUN /root/.cargo/bin/rustup override set nightly && /root/.cargo/bin/cargo test && /root/.cargo/bin/cargo build --release
+
+FROM ubuntu:22.04
 RUN mkdir /app
 WORKDIR /app
-COPY --from=builder /target/release/noted2xero_web noted2xero_web
-COPY --from=builder noted2xero_web/Rocket.toml Rocket.toml
-CMD ./noted2xero_web
+COPY --from=builder /src/target/release/noted2xero_web noted2xero_web
+COPY --from=builder /src/noted2xero_web/Rocket.toml Rocket.toml
+CMD ["./noted2xero_web"]
 
