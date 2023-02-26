@@ -79,3 +79,11 @@ kustomize_mac:
 kustomize_mac_apply:
 	cd deploy/kubernetes/kustomize/overlays/mac && kubectl apply -f kustomize_generated_script.yml
 kustomize_mac_deploy: kustomize_mac kustomize_mac_apply
+
+# Cargo deploys
+repo_deploy_core:
+	cargo publish -p noted2xero_core
+repo_deploy_cli:
+	cargo publish -p noted2xero_cli
+repo_deploy_web:
+	cargo publish -p noted2xero_web
