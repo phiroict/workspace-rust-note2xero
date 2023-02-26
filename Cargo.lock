@@ -1124,8 +1124,8 @@ dependencies = [
 ]
 
 [[package]]
-name = "noted2xero_cli"
-version = "1.11.5"
+name = "noted2xer_cli"
+version = "1.11.10"
 dependencies = [
  "chrono",
  "csv",
@@ -1139,7 +1139,7 @@ dependencies = [
 
 [[package]]
 name = "noted2xero_core"
-version = "1.11.5"
+version = "1.11.10"
 dependencies = [
  "chrono",
  "csv",
@@ -1151,7 +1151,7 @@ dependencies = [
 
 [[package]]
 name = "noted2xero_web"
-version = "1.11.5"
+version = "1.11.10"
 dependencies = [
  "async-std",
  "async-trait",
