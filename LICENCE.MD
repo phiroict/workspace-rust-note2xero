@@ -4,7 +4,7 @@ This program is free software: you can redistribute it and/or modify it under th
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>.
+You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>.
 
 Noted2Xero is licensed under the GPL 2.0, and as such, any derivatives of Noted2Xero must also be licensed under the GPL 2.0. Any modifications made to Noted2Xero must be made available in source code form and must be licensed under the GPL 2.0.
 

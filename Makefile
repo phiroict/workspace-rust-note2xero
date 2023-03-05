@@ -2,6 +2,8 @@ N2X_VERSION ?= $(shell bash get_web_version_from_toml.sh)
 init:
 	rustup override set nightly
 	cargo install cargo-release
+	cargo install cargo-audit
+	cargo install cargo-outdated
 	rustup component add clippy
 	rustup component add rustfmt
 	mkdir -p noted2xero_cli/resources/donefolder
@@ -12,6 +14,8 @@ check_code:
 	cargo clippy
 	cargo fmt
 	cargo test
+	-cargo audit
+	cargo outdated
 build: check_code
 	cargo build
 build_prod: check_code

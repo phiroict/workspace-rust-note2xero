@@ -18,3 +18,7 @@ file_delete:
 teardown:
 	minikube stop
 	minikube delete
+kustomize_arm:
+	cd kustomize && kustomize apply -k overlays/mac
+kustomize_linux:
+	cd kustomize && kustomize apply -k overlays/linux

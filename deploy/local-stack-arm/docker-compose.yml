@@ -8,9 +8,9 @@
         - "../../styles.css:/usr/share/nginx/html/styles.css:ro"
       ports:
         - "8180:80"
-    # Version phiroict/noted2xero_web:1.11.0_arm
+    # Version phiroict/noted2xero_web:1.11.10_arm
     noted2xero_service:
-        image: "phiroict/noted2xero_web@sha256:df9d2f26a29a29b6550ed15005f9b75113e20c2ef67560edfece04823adf5bd8"
+        image: "phiroict/noted2xero_web@sha256:2fa3db1536f2774398c9cd0a6df0d2b34552d13d750bbbae9c3513cfb5360d63"
         ports:
           - "8000:8000"
         environment:

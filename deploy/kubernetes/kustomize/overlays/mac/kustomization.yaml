@@ -5,4 +5,4 @@ resources:
 images:
   - name: phiroict/noted2xero_web
     newName: "phiroict/noted2xero_web"
-    newTag: "1.11.3_arm"
+    newTag: "1.11.10_arm"

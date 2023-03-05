@@ -134,7 +134,7 @@ spec:
         app: noted-web
     spec:
       containers:
-      - image: phiroict/noted2xero_web:1.11.3_arm
+      - image: phiroict/noted2xero_web:1.11.10_arm
         imagePullPolicy: Always
         livenessProbe:
           initialDelaySeconds: 20

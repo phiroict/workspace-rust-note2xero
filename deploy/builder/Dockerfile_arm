@@ -1,5 +1,5 @@
 FROM ubuntu:22.04 as builder
-RUN apt-get update && apt-get upgrade -y && apt-get install --no-install-recommends build-essential=12.9ubuntu3 curl=7.81.0-1ubuntu1.7 ca-certificates=20211016ubuntu0.22.04.1 -y && mkdir -p /src
+RUN apt-get update && apt-get upgrade -y && apt-get install --no-install-recommends build-essential=12.9ubuntu3 curl=7.81.0-1ubuntu1.8 ca-certificates=20211016ubuntu0.22.04.1 -y && mkdir -p /src
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 RUN /root/.cargo/bin/rustup install nightly
