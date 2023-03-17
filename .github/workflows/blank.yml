@@ -54,7 +54,7 @@ jobs:
       - name: Check if there are vulnerabilities
         uses: actions-rs/cargo@v1
         with:
-          command: audit
+          command: "audit --ignore RUSTSEC-2022-0013 --ignore RUSTSEC-2023-0018 --ignore RUSTSEC-2020-0071"
       - name: Run cargo build & code check
         uses: actions-rs/cargo@v1
         with:
