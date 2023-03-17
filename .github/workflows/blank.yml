@@ -27,11 +27,18 @@ jobs:
           token: ${{ secrets.SUBMODULE_TOKEN }}
           submodules: recursive
       - name: Install latest nightly
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: nightly
-          override: true
-          components: rustfmt, clippy, rustfmt, cargo-audit, cargo-outdated
+        run: |
+            apt update && apt upgrade -y && apt install curl
+            curl https://sh.rustup.rs -sSf | sh -s -- -y
+            rustup toolchain install nightly --profile minimal --no-self-update
+            rustup default nightly
+            rustup override set nightly
+            cargo install cargo-release
+            cargo install cargo-audit
+            cargo install cargo-outdated
+            rustup component add clippy
+            rustup component add rustfmt
+        shell: bash
       - name: Run cargo check
         uses: actions-rs/cargo@v1
         with:
