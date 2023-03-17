@@ -31,19 +31,28 @@ jobs:
         with:
           toolchain: nightly
           override: true
-          components: rustfmt, clippy, rustfmt
+          components: rustfmt, clippy, rustfmt, cargo-audit, cargo-outdated
       - name: Run cargo check
         uses: actions-rs/cargo@v1
         with:
           command: check
-      - name: Run cargo build & code check
-        uses: actions-rs/cargo@v1
-        with:
-          command: build
       - name: Run cargo tests
         uses: actions-rs/cargo@v1
         with:
           command: test
+      - name: Check if dependencies are outdated
+        uses: actions-rs/cargo@v1
+        with:
+          command: outdated
+      - name: Check if there are vulnerabilities
+        uses: actions-rs/cargo@v1
+        with:
+          command: audit
+      - name: Run cargo build & code check
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
