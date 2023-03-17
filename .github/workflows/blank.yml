@@ -28,7 +28,6 @@ jobs:
           submodules: recursive
       - name: Install latest nightly
         run: |
-            apt update && apt upgrade -y && apt install curl
             curl https://sh.rustup.rs -sSf | sh -s -- -y
             rustup toolchain install nightly --profile minimal --no-self-update
             rustup default nightly
@@ -37,7 +36,6 @@ jobs:
             cargo install cargo-audit
             cargo install cargo-outdated
             rustup component add clippy
-            rustup component add rustfmt
         shell: bash
       - name: Run cargo check
         uses: actions-rs/cargo@v1
@@ -54,7 +52,8 @@ jobs:
       - name: Check if there are vulnerabilities
         uses: actions-rs/cargo@v1
         with:
-          command: "audit --ignore RUSTSEC-2022-0013 --ignore RUSTSEC-2023-0018 --ignore RUSTSEC-2020-0071"
+          command: audit
+          args:  --ignore RUSTSEC-2022-0013 --ignore RUSTSEC-2023-0018 --ignore RUSTSEC-2020-0071
       - name: Run cargo build & code check
         uses: actions-rs/cargo@v1
         with:
