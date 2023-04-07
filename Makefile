@@ -51,7 +51,7 @@ release-windows: test
 	cargo build --release --target x86_64-pc-windows-gnu
 run_cli: build
 	cp target/debug/noted2xero_cli noted2xero_cli/
-	cd noted2xero_cli && ./noted2xero_cli 3045
+	cd noted2xero_cli && ./noted2xero_cli 4120
 run_web: build
 	cp target/debug/noted2xero_web noted2xero_web/
 	cd noted2xero_web && ./noted2xero_web
