@@ -4,3 +4,5 @@ members = [
     "noted2xero_web",
     "noted2xero_cli"
 ]
+
+resolver="2"
